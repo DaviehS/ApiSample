@@ -1,0 +1,8 @@
+{
+  "Colors": {
+    "Favotire": "blue"
+  },
+  "ConnectionStrings": {
+    "TestConnectionString": "server=(localdb)\\ProjectsV13;Database=TestDb;Integrated Security=true;MultipleActiveResultSets=true"
+  }
+}
