@@ -15,6 +15,6 @@ namespace WebApplication1.Models
         public DateTime Created { get; set; } = DateTime.Now;
         public int Exists { get; set; } = 0;
          
-        public IEnumerable<Location> Locations { get; set; }
+        public ICollection<Location> Locations { get; set; }
     }
 }

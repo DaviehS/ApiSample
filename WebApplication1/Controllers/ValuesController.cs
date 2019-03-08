@@ -29,11 +29,12 @@ namespace WebApplication1.Controllers
 
         // GET api/values    
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> Get()
+        public async Task<ActionResult<ICollection<Product>>> Get()
         {
             var ans = await _librepository.GetProductsAsync();
             
-            return Ok(_mapper.Map<IEnumerable<ProductModel>>(ans));
+            //return Ok(_mapper.Map<IEnumerable<ProductModel>>(ans));
+            return Ok(ans);
         }
         
         // GET api/values/5
@@ -49,16 +50,15 @@ namespace WebApplication1.Controllers
         
         // POST api/values
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct([FromBody] Product p)
-        {
-            if(_librepository.GetProductAsync(p.Id)!= null)
-            {
-                return BadRequest("Product already Exists");
-            }
 
-            var ans = await _librepository.AddProductAsync(p);
+        
+        public async Task<ActionResult<ProductModel>> PostProduct([FromBody] ProductModel pm)
+        {
+            var prod = _mapper.Map<Product>(pm);
+
+            var ans = await _librepository.AddProductAsync(prod);
             if (ans)
-                return CreatedAtAction(nameof(Get), new { id = p.Id }, p);
+                return CreatedAtAction(nameof(Get), new { id = prod.Id }, _mapper.Map<ProductModel>(prod));
             else 
                 return StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
         }
@@ -75,12 +75,13 @@ namespace WebApplication1.Controllers
 
             return NoContent();
         }
+        */
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
-        */
+        
     }
 }

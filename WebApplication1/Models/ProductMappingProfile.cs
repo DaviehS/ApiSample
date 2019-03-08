@@ -13,7 +13,11 @@ namespace WebApplication1.Models
         {
             CreateMap<Product, ProductModel>().
                 ForMember(c => c.Exists,
-                opt => opt.MapFrom(prod => (DateTime.Now-prod.Created).Days));
+                opt => opt.MapFrom(prod => (DateTime.Now-prod.Created).Days))
+                .ReverseMap();
+
+            CreateMap<Location, LocationModel>()
+                .ReverseMap();
         }
     }
 }

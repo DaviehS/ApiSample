@@ -14,7 +14,8 @@ namespace WebApplication1.Data.Entities
 
         public DateTime Created { get; set; } = DateTime.Now;
         public string Seller { get; set; }
-        public IEnumerable<Location> Locations { get; set; }
+
+        public ICollection<Location> Locations { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ namespace WebApplication1.Services
 {
     public interface ILibRepository
     {
-        Task<IEnumerable<Product>> GetProductsAsync();
+        Task<ICollection<Product>> GetProductsAsync();
         Task<Product> GetProductAsync(int id);
         Task<bool> AddProductAsync(Product p);
         Task<bool> SaveAllAsync();

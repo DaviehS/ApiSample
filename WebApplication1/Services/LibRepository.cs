@@ -16,16 +16,17 @@ namespace WebApplication1.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<ICollection<Product>> GetProductsAsync()
         {
-            var ans = _context.Products.OrderBy(a => a.Name);
-            return await ans.ToListAsync();
+            var ans = _context.Products.Include(a=>a.Locations);
+         
+            return await ans.OrderBy(a => a.Name).ToListAsync();
         }
 
         public async Task<Product> GetProductAsync(int id)
         {
-            var ans = _context.Products.FindAsync(id);
-            return await ans;
+            var ans = await _context.Products.FindAsync(id);
+            return ans;
         }
         public async Task<bool> AddProductAsync(Product p)
         {
